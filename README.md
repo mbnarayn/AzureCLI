@@ -34,3 +34,8 @@ az resource list
 ```
 az group create -l uksouth -n MyResourceGroup
 ```
+### Create a VNET
+```
+az network vnet create --name VNet-Demo --resource-group MyResourceGroup --location uksouth --address-prefixes 192.168.0.0/16 --subnet-name Subnet-01 --subnet-prefix 192.168.1.0/24
+```
+
