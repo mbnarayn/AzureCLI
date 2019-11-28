@@ -22,11 +22,15 @@ On the the Cloud Shell this command only lists the subscriptions for the directo
 ```
 az account show
 ```
-### Change Subscription Context
+### Change subscription context
 ```
 az account set --subscription "Company Subscription"
 ```
 ### List all resources in a subscription
 ```
 az resource list
+```
+### Create a Resource Group
+```
+az group create -l uksouth -n MyResourceGroup
 ```
