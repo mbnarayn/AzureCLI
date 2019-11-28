@@ -13,3 +13,20 @@ az --version
 ```
 az login
 ```
+### Get subscriptions that the current account can access
+```
+az account list
+```
+On the the Cloud Shell this command only lists the subscriptions for the directory that is currently selected in the Poral
+### Show currently selected Azure subscription
+```
+az account show
+```
+### Change Subscription Context
+```
+az account set --subscription "Company Subscription"
+```
+### List all resources in a subscription
+```
+az resource list
+```
