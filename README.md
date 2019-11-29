@@ -73,4 +73,7 @@ az network vnet subnet update --vnet-name $vnetname --name $subnetname3 --resour
 az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name AllowRdpFromAnywhere --access Allow --protocol Tcp --direction Inbound --priority 101 --source-address-prefix "*" --source-port-range "*" --destination-address-prefix "VirtualNetwork" --destination-port-range "*"
 az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name AllowAllIntraSubnetTraffic --access Allow --protocol Tcp --direction Inbound --priority 100 --source-address-prefix "$subnetadd1" --source-port-range "*" --destination-address-prefix "$subnetadd1" --destination-port-range "*"
 ```
-
+#### Delete NSG Rules
+```
+az network nsg rule delete --resource-group $rgname --nsg-name $subnetname1 --name AllowAllIntraSubnetTraffic
+```
