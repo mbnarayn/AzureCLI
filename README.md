@@ -39,6 +39,8 @@ az group create -l uksouth -n MyResourceGroup
 az network vnet create --name VNet-Demo --resource-group MyResourceGroup --location uksouth --address-prefixes 192.168.0.0/16 --subnet-name Subnet-01 --subnet-prefix 192.168.1.0/24
 ```
 ## Create a VNET with three subnets and associate a NSG to each subnet
+#### Define Variables
+You can run the Azure CLI with the az command from either Windows Command Prompt or PowerShell, however declaring variables in this format only works when using Azure CLI via PowerShell.
 ```
 $rgname="azcli"
 $location="uksouth"
@@ -51,13 +53,13 @@ $subnetadd2="10.60.2.0/24"
 $subnetname3="backend"
 $subnetadd3="10.60.3.0/24"
 ```
-#### Create three subnets
+#### Create a VNET with three Subnets
 ```
 az network vnet create --name $vnetname --resource-group $rgname --location $location --address-prefix $vnetaddress --subnet-name $subnetname1 --subnet-prefix $subnetadd1
 az network vnet subnet create --address-prefix $subnetadd2 --name $subnetname2 --resource-group $rgname --vnet-name $vnetname
 az network vnet subnet create --address-prefix $subnetadd3 --name $subnetname3 --resource-group $rgname --vnet-name $vnetname
 ```
-#### Create three NSGs and associate to subnet
+#### Create three NSGs and associate a NSG per Subnet
 ```
 az network nsg create --resource-group $rgname --name $subnetname1 --location $location
 az network vnet subnet update --vnet-name $vnetname --name $subnetname1 --resource-group $rgname --network-security-group $subnetname1
