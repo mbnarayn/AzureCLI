@@ -38,4 +38,32 @@ az group create -l uksouth -n MyResourceGroup
 ```
 az network vnet create --name VNet-Demo --resource-group MyResourceGroup --location uksouth --address-prefixes 192.168.0.0/16 --subnet-name Subnet-01 --subnet-prefix 192.168.1.0/24
 ```
+## Create a VNET with three subnets and associate a NSG to each subnet
+```
+$rgname="azcli"
+$location="uksouth"
+$vnetname="azclivnet2"
+$vnetaddress="10.60.0.0/16"
+$subnetname1="frontend"
+$subnetadd1="10.60.1.0/24"
+$subnetname2="middletier"
+$subnetadd2="10.60.2.0/24"
+$subnetname3="backend"
+$subnetadd3="10.60.3.0/24"
+```
+#### Create three subnets
+```
+az network vnet create --name $vnetname --resource-group $rgname --location $location --address-prefix $vnetaddress --subnet-name $subnetname1 --subnet-prefix $subnetadd1
+az network vnet subnet create --address-prefix $subnetadd2 --name $subnetname2 --resource-group $rgname --vnet-name $vnetname
+az network vnet subnet create --address-prefix $subnetadd3 --name $subnetname3 --resource-group $rgname --vnet-name $vnetname
+```
+#### Create three NSGs and associate to subnet
+```
+az network nsg create --resource-group $rgname --name $subnetname1 --location $location
+az network vnet subnet update --vnet-name $vnetname --name $subnetname1 --resource-group $rgname --network-security-group $subnetname1
+az network nsg create --resource-group $rgname --name $subnetname2 --location $location
+az network vnet subnet update --vnet-name $vnetname --name $subnetname2 --resource-group $rgname --network-security-group $subnetname2
+az network nsg create --resource-group $rgname --name $subnetname3 --location $location
+az network vnet subnet update --vnet-name $vnetname --name $subnetname3 --resource-group $rgname --network-security-group $subnetname3
+```
 
