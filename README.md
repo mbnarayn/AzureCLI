@@ -77,7 +77,7 @@ az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --na
 ```
 az network nsg rule delete --resource-group $rgname --nsg-name $subnetname1 --name AllowAllIntraSubnetTraffic
 ```
-### Update NSG Rules
+### Update NSG Rules - Examples
 ```
 az network nsg rule update --name AllowRdpFromAnywhere --nsg-name $subnetname1 --resource-group $rgname --source-address-prefixes 195.12.20.20/32
 az network nsg rule update --name AllowRdpFromAnywhere --nsg-name $subnetname1 --resource-group $rgname --source-port-range "3389" --destination-address-prefix "10.50.1.1/32"
