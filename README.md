@@ -59,7 +59,7 @@ az network vnet create --name $vnetname --resource-group $rgname --location $loc
 az network vnet subnet create --address-prefix $subnetadd2 --name $subnetname2 --resource-group $rgname --vnet-name $vnetname
 az network vnet subnet create --address-prefix $subnetadd3 --name $subnetname3 --resource-group $rgname --vnet-name $vnetname
 ```
-#### Create three NSGs and associate a NSG per Subnet
+#### Create three NSGs and associate a NSG to each Subnet
 ```
 az network nsg create --resource-group $rgname --name $subnetname1 --location $location
 az network vnet subnet update --vnet-name $vnetname --name $subnetname1 --resource-group $rgname --network-security-group $subnetname1
