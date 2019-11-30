@@ -82,3 +82,12 @@ az network nsg rule delete --resource-group $rgname --nsg-name $subnetname1 --na
 az network nsg rule update --name AllowRdpFromAnywhere --nsg-name $subnetname1 --resource-group $rgname --source-address-prefixes 195.12.20.20/32
 az network nsg rule update --name AllowRdpFromAnywhere --nsg-name $subnetname1 --resource-group $rgname --source-port-range "3389" --destination-address-prefix "10.50.1.1/32"
 ```
+### Get a list of popular VM images in the Azure VM Marketplace (Table Format)
+```
+az vm image list --output table
+```
+### Get a list of all VM images in the Azure UK South (Table Format)
+```
+az vm image list -l uksouth --all --output table
+```
+
