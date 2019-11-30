@@ -86,7 +86,7 @@ az network nsg rule update --name AllowRdpFromAnywhere --nsg-name $subnetname1 -
 ```
 az vm image list --output table
 ```
-### Get a list of all VM images in the Azure UK South (Table Format)
+### Get a list of all VM images in a particular Azure region (Table Format)
 ```
 az vm image list -l uksouth --all --output table
 ```
