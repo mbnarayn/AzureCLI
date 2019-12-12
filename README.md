@@ -90,4 +90,16 @@ az vm image list --output table
 ```
 az vm image list -l uksouth --all --output table
 ```
-
+### Get a list of all VMs in the subscription (Table Format)
+```
+az vm list -o table
+```
+### Delete a Virtual Machine
+```
+az vm delete --resource-group rgname --name vmname
+```
+### Get a list of all Managed Disks in the subscription (Table Format)
+You can use the --query parameter to customize the properties and columns you want to show in the list output. The following example shows how to select just the Managed Disk Name, Disk State and the Resource Group Name in the list command.
+```
+az disk list --query "[].{resource:resourceGroup, name:name, diskstate:diskState}" -o table
+```
