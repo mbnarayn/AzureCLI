@@ -103,3 +103,42 @@ You can use the --query parameter to customize the properties and columns you wa
 ```
 az disk list --query "[].{resource:resourceGroup, name:name, diskstate:diskState}" -o table
 ```
+### Delete a Resource Group
+```
+az group delete -n resourcegroupname
+```
+### List VM sizes in a region
+```
+az vm list-sizes -l ukwest
+```
+## Create a Resource Group, VNET, Subnet, NSG Rules and Virtual Machine
+```
+$rgname="edbmigration"
+$location="ukwest"
+$vnetname="edbmigration"
+$vnetaddress="10.205.0.0/16"
+$subnetname1="subnet1"
+$subnetadd1="10.205.1.0/24"
+$vmname1="migration04"
+$vm1size="Standard_DS2_v2"
+$vmimage1="Win2019Datacenter"
+$vmname1ip="10.205.1.11"
+$adminusername="vmadmin"
+$adminpassword="SecurePassword"
+$vmname1datadisk1size="1024"
+
+
+az group create -l $location -n $rgname
+az network vnet create --name $vnetname --resource-group $rgname --location $location --address-prefix $vnetaddress --subnet-name $subnetname1 --subnet-prefix $subnetadd1
+
+az network nsg create --resource-group $rgname --name $subnetname1 --location $location
+az network vnet subnet update --vnet-name $vnetname --name $subnetname1 --resource-group $rgname --network-security-group $subnetname1
+
+az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name AllowAllIntraSubnetTraffic --access Allow --protocol Tcp --direction Inbound --priority 100 --source-address-prefix "$subnetadd1" --source-port-range "*" --destination-address-prefix "$subnetadd1" --destination-port-range "*"
+
+az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name AllowRdpFromCivica --access Allow --protocol Tcp --direction Inbound --priority 101 --source-address-prefix 8.8.8.8 8.8.4.4 1.1.1.1 --source-port-range "*" --destination-address-prefix "VirtualNetwork" --destination-port-range "3389"
+
+az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name DenyAll --access Deny --protocol * --direction Inbound --priority 4000 --source-address-prefix "*" --source-port-range "*" --destination-address-prefix "*" --destination-port-range "*"
+
+az vm create --resource-group $rgname --name $vmname1 --image $vmimage1 --admin-username $adminusername --admin-password $adminpassword --public-ip-address-dns-name $vmname1 --data-disk-sizes-gb $vmname1datadisk1size --subnet $subnetname1 --vnet-name $vnetname --private-ip-address $vmname1ip --size $vm1size --storage-sku Premium_LRS --public-ip-address-allocation static --os-disk-name $vmname1 --% --nsg ""
+```
