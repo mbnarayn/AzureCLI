@@ -17,7 +17,7 @@ az login
 ```
 az account list
 ```
-On the the Cloud Shell this command only lists the subscriptions for the directory that is currently selected in the Poral
+On the Cloud Shell this command only lists the subscriptions for the directory that is currently selected in the Portal
 ### Show currently selected Azure subscription
 ```
 az account show
