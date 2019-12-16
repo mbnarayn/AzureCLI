@@ -111,7 +111,7 @@ az group delete -n resourcegroupname
 ```
 az vm list-sizes -l ukwest
 ```
-## Create a Resource Group, VNET, Subnet, NSG Rules and Virtual Machine
+## Create Resource Group, VNET, Subnet, NSG Rules and Virtual Machine
 ```
 $rgname="edbmigration"
 $location="ukwest"
@@ -144,3 +144,6 @@ az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --na
 
 az vm create --resource-group $rgname --name $vmname1 --image $vmimage1 --admin-username $adminusername --admin-password $adminpassword --public-ip-address-dns-name $vmname1 --data-disk-sizes-gb $vmname1datadisk1size --subnet $subnetname1 --vnet-name $vnetname --private-ip-address $vmname1ip --size $vm1size --storage-sku Premium_LRS --public-ip-address-allocation static --os-disk-name $vmname1 --% --nsg ""
 ```
+To create a VM with no NSG assigned directly to the NIC use --nic "". The --% in the command above stops parsing input as PowerShell commands or expressions. This is only needed when running Azure CLI commands from PowerShell as Powershell will remove "" so you will see error: argument --nsg: expected one argument
+
+Allowed values for --storage-sku: Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS.
