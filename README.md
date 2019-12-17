@@ -147,3 +147,7 @@ az vm create --resource-group $rgname --name $vmname1 --image $vmimage1 --admin-
 To create a VM with no NSG assigned directly to the NIC use --nic "". The --% in the command above stops parsing input as PowerShell commands or expressions. This is only needed when running Azure CLI commands from PowerShell as Powershell will remove "" so you will see error: argument --nsg: expected one argument
 
 Allowed values for --storage-sku: Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS. Both and OS and Data disk will use the same Storage SKU.
+### Get details of a VNET including Subnet IDs
+```
+az network vnet subnet show -g MyResourceGroup -n MySubnet --vnet-name MyVNet
+```
