@@ -138,7 +138,7 @@ az network vnet subnet update --vnet-name $vnetname --name $subnetname1 --resour
 
 az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name AllowAllIntraSubnetTraffic --access Allow --protocol Tcp --direction Inbound --priority 100 --source-address-prefix "$subnetadd1" --source-port-range "*" --destination-address-prefix "$subnetadd1" --destination-port-range "*"
 
-az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name AllowRdpFromCivica --access Allow --protocol Tcp --direction Inbound --priority 101 --source-address-prefix 8.8.8.8 8.8.4.4 1.1.1.1 --source-port-range "*" --destination-address-prefix "VirtualNetwork" --destination-port-range "3389"
+az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name AllowRdpFromLocation --access Allow --protocol Tcp --direction Inbound --priority 101 --source-address-prefix 8.8.8.8 8.8.4.4 1.1.1.1 --source-port-range "*" --destination-address-prefix "VirtualNetwork" --destination-port-range "3389"
 
 az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name DenyAll --access Deny --protocol * --direction Inbound --priority 4000 --source-address-prefix "*" --source-port-range "*" --destination-address-prefix "*" --destination-port-range "*"
 
