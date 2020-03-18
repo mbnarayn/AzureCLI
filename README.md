@@ -150,9 +150,9 @@ To create a VM with no NSG assigned directly to the NIC use --nic "". The --% in
 
 Allowed values for --storage-sku: Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS. Both and OS and Data disk will use the same Storage SKU.
 
-## Create Virtual Machine on an existing subnet and availability set
+## Create Virtual Machine on an existing subnet and Availability Set without a Public IP address
 
-`
+```
 $rgname="yourresourcegroup"
 $vnetname="yourvnet"
 $subnetname1="yoursubnet"
@@ -164,8 +164,7 @@ $avset="youravset"
 $vm1size="Standard_D4s_v3"
 
 az vm create --resource-group $rgname --name $vmname1 --image $vmimage1 --admin-username $adminusername --admin-password $adminpassword --subnet $subnetname1 --vnet-name $vnetname --size $vm1size --storage-sku StandardSSD_LRS --os-disk-name $vmname1 --availability-set $avset --% --nsg "" --public-ip-address ""
-`
-
+```
 
 ## Get details of a VNET including Subnet IDs
 ```
