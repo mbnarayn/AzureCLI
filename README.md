@@ -73,6 +73,8 @@ az network vnet subnet update --vnet-name $vnetname --name $subnetname3 --resour
 az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name AllowRdpFromAnywhere --access Allow --protocol Tcp --direction Inbound --priority 101 --source-address-prefix "*" --source-port-range "*" --destination-address-prefix "VirtualNetwork" --destination-port-range "*"
 az network nsg rule create --resource-group $rgname --nsg-name $subnetname1 --name AllowAllIntraSubnetTraffic --access Allow --protocol Tcp --direction Inbound --priority 100 --source-address-prefix "$subnetadd1" --source-port-range "*" --destination-address-prefix "$subnetadd1" --destination-port-range "*"
 ```
+Note: If you run the az network nsg rule create command and specify a NSG rule name that is already in use for either an Inbound or an Outbound rule, the existing NSG rule is replaced with the parameters of the new rule without any warning.
+
 ### Delete NSG Rules
 ```
 az network nsg rule delete --resource-group $rgname --nsg-name $subnetname1 --name AllowAllIntraSubnetTraffic
@@ -147,7 +149,25 @@ az vm create --resource-group $rgname --name $vmname1 --image $vmimage1 --admin-
 To create a VM with no NSG assigned directly to the NIC use --nic "". The --% in the command above stops parsing input as PowerShell commands or expressions. This is only needed when running Azure CLI commands from PowerShell as Powershell will remove "" so you will see error: argument --nsg: expected one argument
 
 Allowed values for --storage-sku: Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS. Both and OS and Data disk will use the same Storage SKU.
-### Get details of a VNET including Subnet IDs
+
+## Create Virtual Machine on an existing subnet and availability set
+
+`
+$rgname="yourresourcegroup"
+$vnetname="yourvnet"
+$subnetname1="yoursubnet"
+$vmname1="vmname"
+$adminusername="vmadmin"
+$adminpassword="SecurePassword"
+$vmimage1="Win2019Datacenter"
+$avset="youravset"
+$vm1size="Standard_D4s_v3"
+
+az vm create --resource-group $rgname --name $vmname1 --image $vmimage1 --admin-username $adminusername --admin-password $adminpassword --subnet $subnetname1 --vnet-name $vnetname --size $vm1size --storage-sku StandardSSD_LRS --os-disk-name $vmname1 --availability-set $avset --% --nsg "" --public-ip-address ""
+`
+
+
+## Get details of a VNET including Subnet IDs
 ```
 az network vnet subnet show -g MyResourceGroup -n MySubnet --vnet-name MyVNet
 ```
