@@ -150,6 +150,10 @@ To create a VM with no NSG assigned directly to the NIC use --nic "". The --% in
 
 Allowed values for --storage-sku: Standard_LRS, Premium_LRS, StandardSSD_LRS, UltraSSD_LRS. Both and OS and Data disk will use the same Storage SKU.
 
+## Create an Availability Set
+
+`az vm availability-set create -n youravsetname -g yourresourcegroup --platform-fault-domain-count 2 --platform-update-domain-count 5`
+
 ## Create Virtual Machine on an existing subnet and Availability Set without a Public IP address
 
 ```
