@@ -154,7 +154,7 @@ Allowed values for --storage-sku: Standard_LRS, Premium_LRS, StandardSSD_LRS, Ul
 
 `az vm availability-set create -n youravsetname -g yourresourcegroup --platform-fault-domain-count 2 --platform-update-domain-count 5`
 
-## Create Virtual Machine on an existing subnet and Availability Set without a Public IP address
+## Create Virtual Machine on an existing Subnet and Availability Set without a Public IP address
 
 ```
 $rgname="yourresourcegroup"
