@@ -30,6 +30,10 @@ az account set --subscription "Company Subscription"
 ```
 az resource list
 ```
+### List all Resource Groups in a Subscription
+```
+az group list -o table
+```
 ### Create a Resource Group
 ```
 az group create -l uksouth -n MyResourceGroup
