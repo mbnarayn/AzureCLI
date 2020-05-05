@@ -113,6 +113,10 @@ az disk list --query "[].{resource:resourceGroup, name:name, diskstate:diskState
 ```
 az group delete -n resourcegroupname
 ```
+The below command deletes a resource group without waiting for operation to finish and does not prompt for confirmation. Ensure that the correct subscription is selected or else you may inadvertently delete the wrong resource group in a different subscription.
+```
+az group delete -n resourcegroupname -y --no-wait
+```
 ### List VM sizes in a region
 ```
 az vm list-sizes -l ukwest
