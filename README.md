@@ -42,6 +42,10 @@ az group list --query "[?contains(name, 'uat')]" --output table
 ```
 az group create -l uksouth -n MyResourceGroup
 ```
+### Assign Permission for a User to a Specific Resource Group
+```
+az role assignment create --assignee "user@domain.com" --role "Reader" --resource-group "resourcegroupname"
+```
 ### Create a VNET
 ```
 az network vnet create --name VNet-Demo --resource-group MyResourceGroup --location uksouth --address-prefixes 192.168.0.0/16 --subnet-name Subnet-01 --subnet-prefix 192.168.1.0/24
