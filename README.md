@@ -34,6 +34,10 @@ az resource list
 ```
 az group list -o table
 ```
+### List all Resource Groups in a Subscription which contains String "uat" in name
+```
+az group list --query "[?contains(name, 'uat')]" --output table
+```
 ### Create a Resource Group
 ```
 az group create -l uksouth -n MyResourceGroup
